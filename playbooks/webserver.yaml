@@ -1,0 +1,12 @@
+---
+  - name: testing
+    hosts: webserver
+    become: true ## to use sudo to connect
+    tasks:
+      - name: list any application
+        yum:
+          list: http
+          #name: net-tools
+          #state: latest
+          #update_cache: yes
+        register: result

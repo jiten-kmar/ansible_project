@@ -1,0 +1,10 @@
+---
+  - hosts: webserver
+    become: true
+    tasks:
+     - name: install samba
+       yum:
+          name: samba
+          state: present
+     - name: Ensure Samba is running
+       service: name=smb state=restarted

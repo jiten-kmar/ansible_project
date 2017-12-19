@@ -1,0 +1,9 @@
+---
+  - hosts: control
+    become: true
+    tasks:
+        - name: install wget
+           pip:
+             name: wget
+             state: present
+             update_cache: yes

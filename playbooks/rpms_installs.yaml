@@ -1,0 +1,9 @@
+---
+  - hosts: webserver
+    become: true
+    tasks:
+        - name: install rpms
+          yum:
+            name: samba
+            state: present
+            update_cache: yes
