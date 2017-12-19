@@ -1,4 +1,4 @@
 [webserver]
-delvmpllbbab32.sapient.com
+ansible-webserver
 [control]
-NYJKUMA244319 ansible_connection=local
+ansible-controller
