@@ -1,0 +1,10 @@
+---
+- hosts: ansible-webserver
+  become: true
+  tasks: 
+   - name: install ngninx
+     yum:
+      name: nginx
+      state: present
+      update_cache: yes
+
