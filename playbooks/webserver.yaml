@@ -1,12 +1,12 @@
----
-  - name: testing
-    hosts: webserver
-    become: true ## to use sudo to connect
-    tasks:
-      - name: list any application
-        yum:
-          list: http
-          #name: net-tools
-          #state: latest
-          #update_cache: yes
-        register: result
+--- 
+- 
+  become: true
+  hosts: ansible-webserver
+  tasks: 
+    - 
+      name: "Install httpd server"
+      yum: 
+        name: httpd
+        state: present
+    - name: Ensure httpd is running
+      service: name=httpd state=restarted
