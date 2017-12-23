@@ -1,0 +1,21 @@
+--- 
+- 
+  become: true
+  hosts: ansible-webserver
+  tasks: 
+    - name: Install httpd server
+      yum: 
+        name: httpd
+        state: present
+    - name: Ensure httpd is running
+      service: name=httpd state=started
+      notify: 
+        - restart httpd
+
+    - name: copy index.html file to /var/www/html
+      copy: src=index.html dest=/var/www/html/ mode=0755
+      notify: restart httpd
+
+  handlers:
+    - name: restart httpd
+      service: name=httpd state=restarted  
