@@ -1,0 +1,21 @@
+--- 
+- 
+  become: true
+  hosts: ansible-webserver
+  tasks: 
+    - name: Install httpd server
+      yum: 
+        name: httpd
+        state: present
+    - name: Ensure httpd is running
+      service: name=httpd state=started
+      notify: 
+        - restart httpd
+
+    - name: delete  index.html file from /var/www/html
+      file: path=/var/www/html/index.html state=absent
+      notify: restart httpd
+
+  handlers:
+    - name: restart httpd
+      service: name=httpd state=restarted  
