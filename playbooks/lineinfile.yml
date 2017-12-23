@@ -1,0 +1,22 @@
+--- 
+- 
+  become: true
+  hosts: ansible-webserver
+  tasks: 
+    - name: Install httpd server
+      yum: 
+        name: httpd
+        state: present
+    - name: Ensure httpd is running
+      service: name=httpd state=started
+      notify: 
+        - restart httpd
+
+    - name: change one line in httpd.conf
+      lineinfile: dest=/etc/httpd/conf/httpd.conf regexp=^Listen
+                  line="Listen 81"
+      notify: restart httpd
+
+  handlers:
+    - name: restart httpd
+      service: name=httpd state=restarted  
